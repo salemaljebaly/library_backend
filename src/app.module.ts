@@ -6,6 +6,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { JwtStrategy } from './auth/jwt.strategy';
 import { AuthModule } from './auth/auth.module';
+import { MembersModule } from './members/members.module';
+import { DepartmentModule } from './department/department.module';
 
 
 @Module({
@@ -13,7 +15,9 @@ import { AuthModule } from './auth/auth.module';
     ConfigModule.forRoot({isGlobal: true}),
     TypeOrmModule.forRoot(),
     UsersModule,
-    AuthModule
+    AuthModule,
+    MembersModule, 
+    DepartmentModule
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

@@ -8,7 +8,7 @@ async function bootstrap() {
   app.enableCors();
   const config = new DocumentBuilder()
   .setTitle(process.env.APP_NAME)
-  .setDescription('The SOS API description')
+  .setDescription(process.env.APP_NAME + ' API description')
   .setVersion('1.0')
   .addTag(process.env.APP_NAME)
   .addBearerAuth()

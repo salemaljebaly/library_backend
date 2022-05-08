@@ -1,5 +1,8 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { IsEnum, IsBoolean, IsEmail, IsLatitude, IsLongitude, isLongitude, IsNotEmpty, IsPhoneNumber, IsString, MinLength } from "class-validator";
+import { CreateDepartmentDto } from "src/department/dto/create-department.dto";
+import { UpdateDepartmentDto } from "src/department/dto/update-department.dto";
+import { Department } from "src/department/entities/department.entity";
 import { Long } from "typeorm";
 import { MemberType } from "../enum/memberType.enum";
 
@@ -47,4 +50,5 @@ export class CreateMemberDto {
     @ApiProperty({type: String, enum: MemberType, default : MemberType.Student})
     memberType: MemberType;
     // ----------------------------------------------------------------------------------- //
+    department: Department; 
 }

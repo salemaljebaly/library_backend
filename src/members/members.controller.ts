@@ -21,9 +21,9 @@ export class MembersController {
     return this.membersService.login(membersLoginDto);
   }
   // ----------------------------------------------------------------------------------- //
-  @Post()
-  create(@Body() createMemberDto: CreateMemberDto) {
-    return this.membersService.create(createMemberDto);
+  @Post(':id')
+  create(@Body() createMemberDto: CreateMemberDto, @Param('id') id: number) {
+    return this.membersService.create(createMemberDto, id);
   }
   // ----------------------------------------------------------------------------------- //
   @Get()
@@ -47,9 +47,9 @@ export class MembersController {
     // if(Object.keys(citizen).length > 0){return citizen} else {return {message : AR.no_citizen_found}}
   }
   // ----------------------------------------------------------------------------------- //
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateMemberDto: UpdateMembersDto) {
-    return this.membersService.update(+id, updateMemberDto);
+  @Patch(':id/:depId')
+  update(@Param('id') id: string,@Param('depId') depId: string, @Body() updateMemberDto: UpdateMembersDto) {
+    return this.membersService.update(+id,+depId, updateMemberDto);
   }
   // ----------------------------------------------------------------------------------- //
   @Delete(':id')

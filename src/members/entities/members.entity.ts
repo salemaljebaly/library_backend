@@ -62,5 +62,5 @@ export class Members extends BaseEntity{
     // ----------------------------------------------------------------------------------- //
     // OneToMany relation ship between department and 
     @ManyToOne(() => Department, (department: Department) => department.member)
-    department: CreateDepartmentDto; 
+    department: Department; 
 }

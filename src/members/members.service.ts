@@ -6,29 +6,38 @@ import { MemberLoginDto } from './dto/members-login.dto';
 import { CreateMemberDto } from './dto/create-members.dto';
 import { UpdateMembersDto } from './dto/update-members.dto';
 import { Members } from './entities/members.entity';
+import { CreateDepartmentDto } from 'src/department/dto/create-department.dto';
+import { Department } from 'src/department/entities/department.entity';
 
 @Injectable()
 export class MembersService {
+  relationColumn : string = 'department';
   // ----------------------------------------------------------------------------------- //
   constructor(
     @InjectRepository(Members)
     private memberRepository: Repository<Members>,
     private jwtService: JwtService,
+    @InjectRepository(Department)
+    private departmentRepository: Repository<Department>,
   ) {}
   // ----------------------------------------------------------------------------------- //
   //TODO fix duplicate member
-  async create(createMembernDto: CreateMemberDto) {
-    const member = this.memberRepository.create(createMembernDto);
+  async create(createMembernDto: CreateMemberDto,depId : number) {
+    const dep = this.departmentRepository.findOne(
+      {where:{id: depId}}
+    );
+    console.log(await dep)
+    const member = this.memberRepository.save({...createMembernDto, department : await dep});
     if(await this.findByUserName(createMembernDto.username) == undefined){
-      await member.save();
+      await (await member).save();
     }
     // use delete to hide password from response
-    delete member.password;
+    delete (await member).password;
     return member;
   }
   // ----------------------------------------------------------------------------------- //
   async findAll(): Promise<Members[]> {
-    const member = await this.memberRepository.find();
+    const member = await this.memberRepository.find({ relations: [this.relationColumn] });
     // remove password from response
     member.map((user) => {
       delete user.password;
@@ -37,19 +46,26 @@ export class MembersService {
   }
   // ----------------------------------------------------------------------------------- //
   async findOne(id: number) {
-    const citizen = await this.memberRepository.findOne(
-      {where:{id: id}}
+    const member = await this.memberRepository.findOne(
+      {where:{id: id},  relations: [this.relationColumn] }
     );
-    if (citizen?.password) {
+    if (member?.password) {
       // use delete to hide password fro m response
-      delete citizen.password;
+      delete member.password;
     }
 
-    return citizen;
+    return member;
   }
   // ----------------------------------------------------------------------------------- //
-  async update(id: number, updateMembernDto: UpdateMembersDto) {
-    return await this.memberRepository.update(id, updateMembernDto);
+  async update(id: number,depId : number, updateMembernDto: UpdateMembersDto) {
+    const dep = this.departmentRepository.findOne(
+      {where:{id: depId}}
+    );
+    console.log(await dep)
+    return await this.memberRepository.update(id,{
+      ...updateMembernDto,
+      department : await dep
+    });
   }
   // ----------------------------------------------------------------------------------- //
   async remove(id: number) {
@@ -58,26 +74,24 @@ export class MembersService {
   }
   // ----------------------------------------------------------------------------------- //
   async findByUserName(username: string) {
-    return await this.memberRepository.findOne({
-      where: {
-        username: username,
-      },
-    });
+    return  await this.memberRepository.findOne(
+      {where:{username: username},  relations: [this.relationColumn] }
+    );
   }
   // ----------------------------------------------------------------------------------- //
-  async login(citizenLoginDto: MemberLoginDto) {
+  async login(memberLoginDto: MemberLoginDto) {
     
-    const citizen = await this.validateUser(citizenLoginDto);
+    const member = await this.validateUser(memberLoginDto);
 
     // properties  that want to save in jwt
     const payload = {
-      id: citizen.id,
-      firstName: citizen.fullName,
-      username: citizen.username,
-      email: citizen.email,
-      phone: citizen.phone,
-      isActive: citizen.isActive,
-      city: citizen.city      
+      id: member.id,
+      firstName: member.fullName,
+      username: member.username,
+      email: member.email,
+      phone: member.phone,
+      isActive: member.isActive,
+      city: member.city      
     };
 
     return {
@@ -87,15 +101,15 @@ export class MembersService {
   }
   // ----------------------------------------------------------------------------------- //
   // check if user is exist then check compare password to check if user data is correct
-  async validateUser(citizenLoginDto: MemberLoginDto): Promise<Members> {
-    const { username, password } = citizenLoginDto;
+  async validateUser(memberLoginDto: MemberLoginDto): Promise<Members> {
+    const { username, password } = memberLoginDto;
 
-    const citizen = await this.findByUserName(username);
-    if (!(await citizen?.validatePassword(password))) {
+    const member = await this.findByUserName(username);
+    if (!(await member?.validatePassword(password))) {
       throw new UnauthorizedException();
     }
     
-    return citizen;
+    return member;
   }
   // ----------------------------------------------------------------------------------- //
   countAllMember() {

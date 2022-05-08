@@ -6,10 +6,11 @@ import { Members } from './entities/members.entity';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Department } from 'src/department/entities/department.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Members]),
+    TypeOrmModule.forFeature([Members, Department]),
     PassportModule,
     JwtModule.registerAsync({
       imports: [ConfigModule],

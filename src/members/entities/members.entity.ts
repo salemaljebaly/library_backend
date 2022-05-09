@@ -3,6 +3,7 @@ import * as bcrypt from 'bcryptjs';
 import { MemberType } from "../enum/memberType.enum";
 import { Department } from "src/department/entities/department.entity";
 import { CreateDepartmentDto } from "src/department/dto/create-department.dto";
+import { Barrow } from "src/barrow/entities/barrow.entity";
 
 @Entity()
 export class Members extends BaseEntity{
@@ -63,4 +64,8 @@ export class Members extends BaseEntity{
     // OneToMany relation ship between department and 
     @ManyToOne(() => Department, (department: Department) => department.member)
     department: Department; 
+
+    // ----------------------------------------------------------------------------------- //
+    @OneToMany(() => Barrow, (barrow: Barrow) => barrow.member)
+    barrow : Barrow[];
 }

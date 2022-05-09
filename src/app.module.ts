@@ -8,6 +8,8 @@ import { JwtStrategy } from './auth/jwt.strategy';
 import { AuthModule } from './auth/auth.module';
 import { MembersModule } from './members/members.module';
 import { DepartmentModule } from './department/department.module';
+import { BookModule } from './books/book.module';
+import { BarrowModule } from './barrow/barrow.module';
 
 
 @Module({
@@ -17,7 +19,9 @@ import { DepartmentModule } from './department/department.module';
     UsersModule,
     AuthModule,
     MembersModule, 
-    DepartmentModule
+    DepartmentModule,
+    BookModule,
+    BarrowModule
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy],

@@ -16,10 +16,10 @@ export const AR = {
     citizen_created   : "تمت اضافة مواطن جديد للنظام",
     // setting 
     no_email_found: "لايوجد ايميل  في النظام",
-    // reports
-    report_created: "تم انشاء بلاغ",
-    report_update : "تم تحديث حالة البلاغ",
-    report_deleted: "تم حذف البلاغ",
+    // books
+    book_created: "تم انشاء كتاب",
+    book_update : "تم تحديث حالة الكتاب",
+    book_deleted: "تم حذف الكتاب",
     // general messages
     no_result : 'لاتوجد نتائج   '
     

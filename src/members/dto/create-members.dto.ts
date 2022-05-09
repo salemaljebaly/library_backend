@@ -20,32 +20,32 @@ export class CreateMemberDto {
     @ApiProperty({type: String, description: 'username'})
     username: string;
     // ----------------------------------------------------------------------------------- //
-    @IsEmail()
-    @IsNotEmpty()
+    @IsEmail({message: 'يجب ان يكون نوع الحقل ايميلا'})
+    @IsNotEmpty({message: 'يجب ان لا يكون الحقل فارغا'})
     @ApiProperty({type: String, description: 'email'})
     email: string;
     // ----------------------------------------------------------------------------------- //
-    @IsPhoneNumber()
+    @IsPhoneNumber('LY', {message: 'يجب أن يكون رقم الهاتف من دولة ليبيا'})
     @IsNotEmpty()
     @ApiProperty({type: String, description: 'phone'})
     phone: string;
     // ----------------------------------------------------------------------------------- //
-    @IsString()
-    @MinLength(6)
+    @IsString({message: 'يجب ان يكون نوع الحقل نصي'})
+    @MinLength(6, {message: 'يجب أن يكون الحقل اكبر من 6 خانات'})
     @IsNotEmpty()
     @ApiProperty({type: String, description: 'password'})
     password: string;
     // ----------------------------------------------------------------------------------- //    
-    @IsBoolean()
+    @IsBoolean({message: 'يجب ان تكون حالة المستخدم اما مفعلة أو لا'})
     @ApiProperty({type: Boolean, description: 'isActive'})
     isActive: boolean;
     // ----------------------------------------------------------------------------------- //
-    @IsString()
+    @IsString({message: 'يجب ان يكون نوع الحقل نصي'})
     @ApiProperty({type: String, description: 'city'})
     city : string
     // ----------------------------------------------------------------------------------- //
-    @IsString()
-    @IsEnum(MemberType)
+    @IsString({message: 'يجب ان يكون نوع الحقل نصي'})
+    @IsEnum(MemberType, {message : 'يجب ان يكون نوع المستخدم طالب أو أستاذ'})
     @IsNotEmpty()
     @ApiProperty({type: String, enum: MemberType, default : MemberType.Student})
     memberType: MemberType;

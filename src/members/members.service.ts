@@ -26,7 +26,6 @@ export class MembersService {
     const dep = this.departmentRepository.findOne(
       {where:{id: depId}}
     );
-    console.log(await dep)
     const member = this.memberRepository.save({...createMembernDto, department : await dep});
     if(await this.findByUserName(createMembernDto.username) == undefined){
       await (await member).save();
@@ -61,7 +60,7 @@ export class MembersService {
     const dep = this.departmentRepository.findOne(
       {where:{id: depId}}
     );
-    console.log(await dep)
+
     return await this.memberRepository.update(id,{
       ...updateMembernDto,
       department : await dep

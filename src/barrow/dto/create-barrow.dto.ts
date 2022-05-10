@@ -19,10 +19,10 @@ export class CreateReportDto {
   @ApiProperty({ type: String, nullable: true, description: 'returnDate' })
   returnDate: string;
   // ----------------------------------------------------------------------------------- //
-  @ApiProperty({ type: String, nullable: true, description: 'member' })
-  member : Members
+  // @ApiProperty({ type: String, nullable: true, description: 'member' })
+  // member : Members
   // ----------------------------------------------------------------------------------- //
-  @ApiProperty({ type: String, nullable: true, description: 'book' })
-  book : Book
+  // @ApiProperty({ type: String, nullable: true, description: 'book' })
+  // book : Book
   // ----------------------------------------------------------------------------------- //
 }

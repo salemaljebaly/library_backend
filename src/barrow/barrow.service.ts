@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Book } from 'src/books/entities/book.entity';
 import { Members } from 'src/members/entities/members.entity';
 import { Repository } from 'typeorm';
 import { CreateReportDto } from './dto/create-barrow.dto';
@@ -13,13 +14,25 @@ export class BarrowService {
   constructor(
     @InjectRepository(Barrow)
     private barrowRepository: Repository<Barrow>,
+    // --------------------------------------------- //
+    @InjectRepository(Members)
+    private memberRepository: Repository<Members>,
+    // --------------------------------------------- //
+    @InjectRepository(Book)
+    private bookRepository: Repository<Book>,
   ) {}
   // ----------------------------------------------------------------------------------- //
   async create( createReportDto: CreateReportDto) {
     // createReportDto.barrower = citizen;
-    const barrow = this.barrowRepository.create(createReportDto);
-    await barrow.save();
-
+    const currentBook = this.bookRepository.findOne(
+      {where:{id: 1}}
+    );
+    
+    const currentMember = this.memberRepository.findOne(
+      {where:{id: 1}}
+    );
+    delete (await currentMember).password;
+    const barrow = this.barrowRepository.save({...createReportDto, member: await currentMember, book: await currentBook});
     return barrow;
   }
   // ----------------------------------------------------------------------------------- //

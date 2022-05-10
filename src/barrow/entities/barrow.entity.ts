@@ -31,7 +31,7 @@ export class Barrow extends BaseEntity {
   updateAt: Date;
   // ----------------------------------------------------------------------------------- //
   @Column()
-  returnDate : Date;
+  returnDate : string;
   // ----------------------------------------------------------------------------------- //
   @ManyToOne(() =>Members, (member:Members) => member)
   member : Members

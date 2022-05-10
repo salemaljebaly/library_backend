@@ -12,7 +12,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  //TODO fix authorization
   async validate(payload: any) {
     return {
       ...payload

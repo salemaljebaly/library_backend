@@ -133,7 +133,7 @@ export class BookController {
   // ----------------------------------------------------------------------------------- //
   // upload
   // upload single file
-  //TODO fix param id in post swagger
+  //TODO fix param id in post swagger, test on postman
   @Post('upload/:bookId')
   @ApiConsumes('multipart/form-data')
   @ApiBody({
@@ -153,7 +153,6 @@ export class BookController {
   @UseInterceptors(FileInterceptor('file', storage))
   async uploadFile(@Param('bookId') bookId : number, @UploadedFile() file) {
     const currentBook = await this.bookService.findOneBook(1);
-    console.log(currentBook);
     // delete old file from files
     if (currentBook.bookFilePath != null) {
       fs.unlink(

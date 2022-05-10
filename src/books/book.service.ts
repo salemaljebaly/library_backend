@@ -61,7 +61,6 @@ export class BookService {
   // ----------------------------------------------------------------------------------- //
   async uploadFile(id: number, filetype: string, bookFilePath : string) {
     const currentBook  = await this.findOneBook(id)
-    console.log('from servcie ' + currentBook);
     currentBook.fileType = filetype;
     currentBook.bookFilePath = bookFilePath;
     return this.bookRepository.save(currentBook)

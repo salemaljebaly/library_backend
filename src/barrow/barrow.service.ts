@@ -10,6 +10,7 @@ import { FileTypes } from './enums/barrowType';
 
 @Injectable()
 export class BarrowService {
+  relationTable = ['member', 'book'];
   // ----------------------------------------------------------------------------------- //
   constructor(
     @InjectRepository(Barrow)
@@ -22,14 +23,14 @@ export class BarrowService {
     private bookRepository: Repository<Book>,
   ) {}
   // ----------------------------------------------------------------------------------- //
-  async create( createReportDto: CreateReportDto) {
+  async create( createReportDto: CreateReportDto,bookId : number, memberId :number ) {
     // createReportDto.barrower = citizen;
     const currentBook = this.bookRepository.findOne(
-      {where:{id: 1}}
+      {where:{id: bookId}}
     );
     
     const currentMember = this.memberRepository.findOne(
-      {where:{id: 1}}
+      {where:{id: memberId}}
     );
     delete (await currentMember).password;
     const barrow = this.barrowRepository.save({...createReportDto, member: await currentMember, book: await currentBook});
@@ -39,14 +40,14 @@ export class BarrowService {
   // get all barrows with current user authorized
   findAll() {
     return this.barrowRepository.find(
-      { relations: ['barrow'] }
+      { relations:this.relationTable}
       );
   }
   // ----------------------------------------------------------------------------------- //
   // get barrow by user id
   findOne(id: number) {
     return this.barrowRepository.findOne({ where: {id : id}
-      , relations: ['barrow'] 
+      , relations: this.relationTable
     });
   }
 

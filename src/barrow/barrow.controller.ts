@@ -15,6 +15,7 @@ import { UpdateReportDto as UpdateBarrowDto } from './dto/update-barrow.dto';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.gaurd';
 import {
   ApiBearerAuth,
+  ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
 // ----------------------------------------------------------------------------------- //
@@ -26,12 +27,17 @@ export class BookController {
   constructor(private readonly barrowService: BarrowService) {}
   // ----------------------------------------------------------------------------------- //
   @Post()
-  // @UseGuards(JwtAuthGuard)
-  // @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  @ApiParam({
+    name: 'bookId',
+  })
+  
+  @ApiParam({
+    name: 'memberId',
+  })
   create(@Body() createBarrowDto: CreateBarrowDto, @Request() req) {
-
-    // barrowgetway.handleEvent('updated');
-    return this.barrowService.create( createBarrowDto);
+    return this.barrowService.create( createBarrowDto, req.bookId, req.memberId);
   }
   // ----------------------------------------------------------------------------------- //
   @Get()

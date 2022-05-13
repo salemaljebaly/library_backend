@@ -22,7 +22,7 @@ import {
 @ApiTags('Barrow')
 @Controller('barrow')
 // TODO fix manytomany crud operation
-export class BookController {
+export class BarrowController {
   // ----------------------------------------------------------------------------------- //
   constructor(private readonly barrowService: BarrowService) {}
   // ----------------------------------------------------------------------------------- //

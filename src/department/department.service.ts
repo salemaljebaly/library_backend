@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateDepartmentDto } from './dto/create-department.dto';
 import { UpdateDepartmentDto } from './dto/update-department.dto';
@@ -14,8 +15,9 @@ export class DepartmentService {
   ) {}
   // ----------------------------------------------------------------------------------- //
 
-  create(createDepartmentDto: CreateDepartmentDto) {
-    return this.departmentRepository.create(createDepartmentDto).save();
+  async create(createDepartmentDto: CreateDepartmentDto, user: User) {
+    createDepartmentDto.user = user;
+    return await this.departmentRepository.create(createDepartmentDto).save();
   }
   // ----------------------------------------------------------------------------------- //
 

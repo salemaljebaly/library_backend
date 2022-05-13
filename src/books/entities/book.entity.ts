@@ -1,4 +1,5 @@
 import { Barrow } from 'src/barrow/entities/barrow.entity';
+import { User } from 'src/users/entities/user.entity';
 import {
   BaseEntity,
   BeforeInsert,
@@ -24,7 +25,7 @@ export class Book extends BaseEntity {
   @Column()
   bookPublishDate: string;
   // ----------------------------------------------------------------------------------- //
-  @Column()
+  @Column({default: 'salem'})
   authorName: string;
   // ----------------------------------------------------------------------------------- //
   @Column()
@@ -59,5 +60,8 @@ export class Book extends BaseEntity {
   // ----------------------------------------------------------------------------------- //
   @OneToMany(() => Barrow, (barrow: Barrow) => barrow.member)
   barrow : Barrow[];
+  // ----------------------------------------------------------------------------------- //
+  @ManyToOne(() => User, (user: User) => user.book)
+  user : User;
   // ----------------------------------------------------------------------------------- //
 }

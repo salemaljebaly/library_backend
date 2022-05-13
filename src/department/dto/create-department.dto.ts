@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from 'src/users/entities/user.entity';
 
 export class CreateDepartmentDto {
   // ----------------------------------------------------------------------------------- //
@@ -10,5 +11,7 @@ export class CreateDepartmentDto {
   @IsString()
   @ApiProperty({type: String, description: 'department name'})
   dep_name: string;
+  // ----------------------------------------------------------------------------------- //
+  user : User;
   // ----------------------------------------------------------------------------------- //
 }

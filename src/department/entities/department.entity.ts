@@ -1,5 +1,6 @@
 import { Members } from 'src/members/entities/members.entity';
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn , OneToMany, CreateDateColumn, UpdateDateColumn} from 'typeorm';
+import { User } from 'src/users/entities/user.entity';
+import { BaseEntity, Column, Entity, PrimaryGeneratedColumn , OneToMany, CreateDateColumn, UpdateDateColumn, ManyToOne} from 'typeorm';
 
 @Entity()
 export class Department extends BaseEntity {
@@ -23,4 +24,7 @@ export class Department extends BaseEntity {
   // ----------------------------------------------------------------------------------- //
   @OneToMany(() => Members, (member: Members) => member.department)
   member : Members[]; 
+  // ----------------------------------------------------------------------------------- //
+  @ManyToOne(() => User, (user: User) => user.department)
+  user : Department; 
 }

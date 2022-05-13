@@ -24,6 +24,6 @@ import { BarrowModule } from './barrow/barrow.module';
     BarrowModule
   ],
   controllers: [AppController],
-  providers: [AppService, JwtStrategy],
+  providers: [AppService],
 })
 export class AppModule {}

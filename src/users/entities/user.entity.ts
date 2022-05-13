@@ -4,11 +4,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 import { Role } from 'src/auth/enum/role.enum';
+import { Department } from 'src/department/entities/department.entity';
+import { Book } from 'src/books/entities/book.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -58,5 +61,11 @@ export class User extends BaseEntity {
     default: Role.User
   })
   role: Role
+  // ----------------------------------------------------------------------------------- //
+  @OneToMany(() => Department, (department : Department) => department.user)
+  department : Department[]
+  // ----------------------------------------------------------------------------------- //
+  @OneToMany(() => Book, (book : Book) => book.user)
+  book : Book[]
   // ----------------------------------------------------------------------------------- //
 }

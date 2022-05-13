@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   UseGuards,
+  Request,
 } from '@nestjs/common';
 import { ApiTags, ApiBearerAuth } from '@nestjs/swagger';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.gaurd';
@@ -23,8 +24,8 @@ export class DepartmentController {
   @Post() 
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  create(@Body() createDepartmentDto: CreateDepartmentDto) {
-    return this.departmentService.create(createDepartmentDto);
+  create(@Body() createDepartmentDto: CreateDepartmentDto, @Request() req) {
+    return this.departmentService.create(createDepartmentDto, req.user);
   }
   // ----------------------------------------------------------------------------------- //
   @Get()

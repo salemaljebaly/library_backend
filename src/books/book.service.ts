@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Members } from 'src/members/entities/members.entity';
+import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
-import { CreateReportDto } from './dto/create-book.dto';
+import { CreateReportDto as CreateBookDto } from './dto/create-book.dto';
 import { UpdateReportDto } from './dto/update-book.dto';
 import { Book } from './entities/book.entity';
 import { FileTypes } from './enums/bookType';
@@ -15,9 +16,9 @@ export class BookService {
     private bookRepository: Repository<Book>,
   ) {}
   // ----------------------------------------------------------------------------------- //
-  async create( createReportDto: CreateReportDto) {
-    // createReportDto.booker = citizen;
-    const book = this.bookRepository.create(createReportDto);
+  async create( createBookDto: CreateBookDto, user: User) {
+    createBookDto.user = user;
+    const book = this.bookRepository.create(createBookDto);
     await book.save();
 
     return book;

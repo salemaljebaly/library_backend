@@ -79,10 +79,8 @@ export class BookController {
   @ApiBearerAuth()
   @ApiCreatedResponse({ description: AR.book_created })
   create(@Body() createReportDto: CreateReportDto, @Request() req) {
-    // get the current citizen data
-    const citizen = req.user;
     // bookgetway.handleEvent('updated');
-    return this.bookService.create( createReportDto);
+    return this.bookService.create(createReportDto, req.user);
   }
   // ----------------------------------------------------------------------------------- //
   @Get('bookByName')

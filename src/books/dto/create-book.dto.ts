@@ -9,6 +9,7 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { User } from 'src/users/entities/user.entity';
 import { IsNull } from 'typeorm';
 import { FileTypes, BookState, ReportType } from '../enums/bookType';
 
@@ -69,4 +70,5 @@ export class CreateReportDto {
   // @ApiProperty({ type: String, nullable: true, description: 'returnDate' })
   // returnDate : string;
   // ----------------------------------------------------------------------------------- //
+  user : User;
 }

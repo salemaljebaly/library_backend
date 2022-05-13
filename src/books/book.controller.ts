@@ -15,7 +15,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { BookService } from './book.service';
-import { CreateReportDto } from './dto/create-book.dto';
+import { CreateBookDto as CreateBookDto } from './dto/create-book.dto';
 import { UpdateReportDto } from './dto/update-book.dto';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.gaurd';
 import {
@@ -78,9 +78,9 @@ export class BookController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ description: AR.book_created })
-  create(@Body() createReportDto: CreateReportDto, @Request() req) {
+  create(@Body() createBookDto: CreateBookDto, @Request() req) {
     // bookgetway.handleEvent('updated');
-    return this.bookService.create(createReportDto, req.user);
+    return this.bookService.create(createBookDto, req.user);
   }
   // ----------------------------------------------------------------------------------- //
   @Get('bookByName')

@@ -10,7 +10,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { BarrowService } from './barrow.service';
-import { CreateReportDto as CreateBarrowDto } from './dto/create-barrow.dto';
+import { CreateBarrowDto } from './dto/create-barrow.dto';
 import { UpdateReportDto as UpdateBarrowDto } from './dto/update-barrow.dto';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.gaurd';
 import {

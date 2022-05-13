@@ -14,9 +14,9 @@ import { Members } from 'src/members/entities/members.entity';
 import { IsNull } from 'typeorm';
 import { FileTypes, BookState, ReportType } from '../enums/barrowType';
 
-export class CreateReportDto {
+export class CreateBarrowDto {
     // ----------------------------------------------------------------------------------- //
-  @ApiProperty({ type: String, nullable: true, description: 'returnDate' })
+  @ApiProperty({ type: String, nullable: true, description: 'returnDate from barrow' })
   returnDate: string;
   // ----------------------------------------------------------------------------------- //
   // @ApiProperty({ type: String, nullable: true, description: 'member' })

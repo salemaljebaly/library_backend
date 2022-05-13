@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Book } from 'src/books/entities/book.entity';
 import { Members } from 'src/members/entities/members.entity';
 import { Repository } from 'typeorm';
-import { CreateReportDto } from './dto/create-barrow.dto';
+import { CreateBarrowDto } from './dto/create-barrow.dto';
 import { UpdateReportDto } from './dto/update-barrow.dto';
 import { Barrow } from './entities/barrow.entity';
 import { FileTypes } from './enums/barrowType';
@@ -23,7 +23,7 @@ export class BarrowService {
     private bookRepository: Repository<Book>,
   ) {}
   // ----------------------------------------------------------------------------------- //
-  async create( createReportDto: CreateReportDto,bookId : number, memberId :number ) {
+  async create( createReportDto: CreateBarrowDto,bookId : number, memberId :number ) {
     // createReportDto.barrower = citizen;
     const currentBook = this.bookRepository.findOne(
       {where:{id: bookId}}

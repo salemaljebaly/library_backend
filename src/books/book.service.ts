@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Members } from 'src/members/entities/members.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
-import { CreateReportDto as CreateBookDto } from './dto/create-book.dto';
+import { CreateBookDto as CreateBookDto } from './dto/create-book.dto';
 import { UpdateReportDto } from './dto/update-book.dto';
 import { Book } from './entities/book.entity';
 import { FileTypes } from './enums/bookType';

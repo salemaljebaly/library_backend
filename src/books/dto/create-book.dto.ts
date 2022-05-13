@@ -9,39 +9,40 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { AR } from 'src/locale/ar';
 import { User } from 'src/users/entities/user.entity';
 import { IsNull } from 'typeorm';
 import { FileTypes, BookState, ReportType } from '../enums/bookType';
 
-export class CreateReportDto {
+export class CreateBookDto {
   // ----------------------------------------------------------------------------------- //
   @IsString()
   @IsNotEmpty()
-  @ApiProperty({ type: String, nullable: true, description: 'bookName' })
+  @ApiProperty({ type: String, description: 'bookName' })
   bookName: string;
   // ----------------------------------------------------------------------------------- //
   @IsNotEmpty()
-  @ApiProperty({ type: String, nullable: true, description: 'bookPublishDate' })
+  @ApiProperty({ type: String, description: 'bookPublishDate' })
   bookPublishDate: string;
   // ----------------------------------------------------------------------------------- //
   @IsString()
   @IsOptional()
-  @ApiProperty({ type: String, nullable: true, description: 'authorName' })
+  @ApiProperty({ type: String, description: 'authorName' })
   authorName: string;
   // ----------------------------------------------------------------------------------- //
   @IsInt()
   @IsOptional()
-  @ApiProperty({ type: Number, nullable: true, description: 'bookPages' })
+  @ApiProperty({ type: Number, description: 'bookPages' })
   bookPages: number;
   // ----------------------------------------------------------------------------------- //
   @IsString()
   @IsOptional()
-  @ApiProperty({ type: String, nullable: true, description: 'bookPublisher' })
+  @ApiProperty({ type: String, description: 'bookPublisher' })
   bookPublisher: string;
   // ----------------------------------------------------------------------------------- //
   @IsString()
   @IsOptional()
-  @ApiProperty({ type: String, nullable: true, description: 'bookDescription' })
+  @ApiProperty({ type: String, description: 'bookDescription' })
   bookDescription: string;
   // ----------------------------------------------------------------------------------- //
   @IsString()
@@ -53,7 +54,7 @@ export class CreateReportDto {
   // report attach
   @IsOptional()
   @IsString()
-  @ApiProperty({ type: String, nullable: true })
+  @ApiProperty({ type: String})
   bookFilePath: string;
   // ----------------------------------------------------------------------------------- //
   // report file type
@@ -67,7 +68,7 @@ export class CreateReportDto {
   // @IsString()
   // @IsEnum(FileTypes)
   // @IsNotEmpty()
-  // @ApiProperty({ type: String, nullable: true, description: 'returnDate' })
+  // @ApiProperty({ type: String description: 'returnDate' })
   // returnDate : string;
   // ----------------------------------------------------------------------------------- //
   user : User;

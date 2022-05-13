@@ -3,6 +3,7 @@ import { IsEnum, IsBoolean, IsEmail, IsLatitude, IsLongitude, isLongitude, IsNot
 import { CreateDepartmentDto } from "src/department/dto/create-department.dto";
 import { UpdateDepartmentDto } from "src/department/dto/update-department.dto";
 import { Department } from "src/department/entities/department.entity";
+import { User } from "src/users/entities/user.entity";
 import { Long } from "typeorm";
 import { MemberType } from "../enum/memberType.enum";
 
@@ -51,4 +52,7 @@ export class CreateMemberDto {
     memberType: MemberType;
     // ----------------------------------------------------------------------------------- //
     department: Department; 
+    // ----------------------------------------------------------------------------------- //
+    user : User;
+    // ----------------------------------------------------------------------------------- //
 }

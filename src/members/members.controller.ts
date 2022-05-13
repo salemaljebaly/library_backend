@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Res, HttpStatus, UseGuards, Request } from '@nestjs/common';
 import { ApiBearerAuth, ApiCreatedResponse, ApiTags, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { MembersService } from './members.service';
 import { CreateMemberDto } from './dto/create-members.dto';
@@ -22,8 +22,10 @@ export class MembersController {
   }
   // ----------------------------------------------------------------------------------- //
   @Post(':id')
-  create(@Body() createMemberDto: CreateMemberDto, @Param('id') id: number) {
-    return this.membersService.create(createMemberDto, id);
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  create(@Body() createMemberDto: CreateMemberDto, @Param('id') id: number, @Request() req) {
+    return this.membersService.create(createMemberDto, id, req.user);
   }
   // ----------------------------------------------------------------------------------- //
   @Get()
@@ -41,6 +43,8 @@ export class MembersController {
   }
   // ----------------------------------------------------------------------------------- //
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   findOne(@Param('id') id: number) {
     const citizen = this.membersService.findOne(id);
     return citizen;
@@ -48,11 +52,15 @@ export class MembersController {
   }
   // ----------------------------------------------------------------------------------- //
   @Patch(':id/:depId')
-  update(@Param('id') id: string,@Param('depId') depId: string, @Body() updateMemberDto: UpdateMembersDto) {
-    return this.membersService.update(+id,+depId, updateMemberDto);
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  update(@Param('id') id: string,@Param('depId') depId: string, @Body() updateMemberDto: UpdateMembersDto, @Request() req) {
+    return this.membersService.update(+id,+depId, updateMemberDto, req.user);
   }
   // ----------------------------------------------------------------------------------- //
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
   remove(@Param('id') id: string) {
     return this.membersService.remove(+id);
   }

@@ -12,6 +12,7 @@ import * as bcrypt from 'bcryptjs';
 import { Role } from 'src/auth/enum/role.enum';
 import { Department } from 'src/department/entities/department.entity';
 import { Book } from 'src/books/entities/book.entity';
+import { Members } from 'src/members/entities/members.entity';
 
 @Entity()
 export class User extends BaseEntity {
@@ -67,5 +68,8 @@ export class User extends BaseEntity {
   // ----------------------------------------------------------------------------------- //
   @OneToMany(() => Book, (book : Book) => book.user)
   book : Book[]
+  // ----------------------------------------------------------------------------------- //
+  @OneToMany(() => Members, (member : Members) => member.user)
+  member : Members[]
   // ----------------------------------------------------------------------------------- //
 }

@@ -4,6 +4,8 @@ import { MemberType } from "../enum/memberType.enum";
 import { Department } from "src/department/entities/department.entity";
 import { CreateDepartmentDto } from "src/department/dto/create-department.dto";
 import { Barrow } from "src/barrow/entities/barrow.entity";
+import { userInfo } from "os";
+import { User } from "src/users/entities/user.entity";
 
 @Entity()
 export class Members extends BaseEntity{
@@ -68,4 +70,9 @@ export class Members extends BaseEntity{
     // ----------------------------------------------------------------------------------- //
     @OneToMany(() => Barrow, (barrow: Barrow) => barrow.member)
     barrow : Barrow[];
+    // ----------------------------------------------------------------------------------- //
+    // OneToMany relationship between user  and member
+    @ManyToOne(() => User, (user: User) => user.member)
+    user: User; 
+
 }

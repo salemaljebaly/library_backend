@@ -8,6 +8,7 @@ import { UpdateMembersDto } from './dto/update-members.dto';
 import { Members } from './entities/members.entity';
 import { CreateDepartmentDto } from 'src/department/dto/create-department.dto';
 import { Department } from 'src/department/entities/department.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Injectable()
 export class MembersService {
@@ -22,10 +23,13 @@ export class MembersService {
   ) {}
   // ----------------------------------------------------------------------------------- //
   //TODO fix duplicate member
-  async create(createMembernDto: CreateMemberDto,depId : number) {
+  async create(createMembernDto: CreateMemberDto,depId : number, user : User) {
+    // find department by id
     const dep = this.departmentRepository.findOne(
       {where:{id: depId}}
     );
+    // check if admin is created member or not
+    user.role != null ? createMembernDto.user = user : null
     const member = this.memberRepository.save({...createMembernDto, department : await dep});
     if(await this.findByUserName(createMembernDto.username) == undefined){
       await (await member).save();
@@ -56,11 +60,12 @@ export class MembersService {
     return member;
   }
   // ----------------------------------------------------------------------------------- //
-  async update(id: number,depId : number, updateMembernDto: UpdateMembersDto) {
+  async update(id: number,depId : number, updateMembernDto: UpdateMembersDto, user : User) {
     const dep = this.departmentRepository.findOne(
       {where:{id: depId}}
     );
-
+    // check if admin is created member or not
+    user.role != null ? updateMembernDto.user = user : null
     return await this.memberRepository.update(id,{
       ...updateMembernDto,
       department : await dep

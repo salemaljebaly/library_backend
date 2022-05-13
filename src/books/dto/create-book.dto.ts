@@ -16,16 +16,16 @@ import { FileTypes, BookState, ReportType } from '../enums/bookType';
 
 export class CreateBookDto {
   // ----------------------------------------------------------------------------------- //
-  @IsString()
-  @IsNotEmpty()
+  @IsString({message: AR.IsString})
+  @IsNotEmpty({message: AR.IsNotEmpty})
   @ApiProperty({ type: String, description: 'bookName' })
   bookName: string;
   // ----------------------------------------------------------------------------------- //
-  @IsNotEmpty()
+  @IsNotEmpty({message: AR.IsNotEmpty})
   @ApiProperty({ type: String, description: 'bookPublishDate' })
   bookPublishDate: string;
   // ----------------------------------------------------------------------------------- //
-  @IsString()
+  @IsString({message: AR.IsString})
   @IsOptional()
   @ApiProperty({ type: String, description: 'authorName' })
   authorName: string;
@@ -35,41 +35,41 @@ export class CreateBookDto {
   @ApiProperty({ type: Number, description: 'bookPages' })
   bookPages: number;
   // ----------------------------------------------------------------------------------- //
-  @IsString()
+  @IsString({message: AR.IsString})
   @IsOptional()
   @ApiProperty({ type: String, description: 'bookPublisher' })
   bookPublisher: string;
   // ----------------------------------------------------------------------------------- //
-  @IsString()
+  @IsString({message: AR.IsString})
   @IsOptional()
   @ApiProperty({ type: String, description: 'bookDescription' })
   bookDescription: string;
   // ----------------------------------------------------------------------------------- //
-  @IsString()
-  @IsEnum(BookState)
-  @IsNotEmpty()
+  @IsString({message: AR.IsString})
+  @IsEnum(BookState, {message: AR.IsEnum})
+  @IsNotEmpty({message: AR.IsNotEmpty})
   @ApiProperty({ type: String, enum: BookState })
   state: string;
   // ----------------------------------------------------------------------------------- //
   // report attach
   @IsOptional()
-  @IsString()
+  @IsString({message: AR.IsString})
   @ApiProperty({ type: String})
   bookFilePath: string;
   // ----------------------------------------------------------------------------------- //
   // report file type
   @IsOptional()
-  @IsString()
-  @IsEnum(FileTypes)
-  @IsNotEmpty()
+  @IsString({message: AR.IsString})
+  @IsEnum(FileTypes, {message: AR.IsEnum})
+  @IsNotEmpty({message: AR.IsNotEmpty})
   @ApiProperty({ type: String, enum: FileTypes })
   fileType: string;
   // ----------------------------------------------------------------------------------- //
-  // @IsString()
-  // @IsEnum(FileTypes)
-  // @IsNotEmpty()
-  // @ApiProperty({ type: String description: 'returnDate' })
-  // returnDate : string;
+  @IsString({message: AR.IsString})
+  @IsEnum(FileTypes, {message: AR.IsEnum})
+  @IsNotEmpty({message: AR.IsNotEmpty})
+  @ApiProperty({ type: String, description: 'returnDate' })
+  returnDate : string;
   // ----------------------------------------------------------------------------------- //
   user : User;
 }

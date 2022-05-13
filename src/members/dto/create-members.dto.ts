@@ -3,6 +3,7 @@ import { IsEnum, IsBoolean, IsEmail, IsLatitude, IsLongitude, isLongitude, IsNot
 import { CreateDepartmentDto } from "src/department/dto/create-department.dto";
 import { UpdateDepartmentDto } from "src/department/dto/update-department.dto";
 import { Department } from "src/department/entities/department.entity";
+import { AR } from "src/locale/ar";
 import { User } from "src/users/entities/user.entity";
 import { Long } from "typeorm";
 import { MemberType } from "../enum/memberType.enum";
@@ -10,44 +11,44 @@ import { MemberType } from "../enum/memberType.enum";
 export class CreateMemberDto {
     
     // ----------------------------------------------------------------------------------- //
-    @IsString()
+    @IsString({message: AR.IsString})
     @MinLength(3)
-    @IsNotEmpty()
+    @IsNotEmpty({message: AR.IsNotEmpty})
     @ApiProperty({type: String, description: 'firstname'})
     fullName: string;
     // ----------------------------------------------------------------------------------- //
-    @IsString()
-    @IsNotEmpty()
+    @IsString({message: AR.IsString})
+    @IsNotEmpty({message: AR.IsNotEmpty})
     @ApiProperty({type: String, description: 'username'})
     username: string;
     // ----------------------------------------------------------------------------------- //
-    @IsEmail({message: 'يجب ان يكون نوع الحقل ايميلا'})
-    @IsNotEmpty({message: 'يجب ان لا يكون الحقل فارغا'})
+    @IsEmail({message: AR.IsEmail})
+    @IsNotEmpty({message: AR.IsNotEmpty})
     @ApiProperty({type: String, description: 'email'})
     email: string;
     // ----------------------------------------------------------------------------------- //
-    @IsPhoneNumber('LY', {message: 'يجب أن يكون رقم الهاتف من دولة ليبيا'})
-    @IsNotEmpty()
+    @IsPhoneNumber('LY', {message: AR.IsPhoneNumber})
+    @IsNotEmpty({message: AR.IsNotEmpty})
     @ApiProperty({type: String, description: 'phone'})
     phone: string;
     // ----------------------------------------------------------------------------------- //
-    @IsString({message: 'يجب ان يكون نوع الحقل نصي'})
-    @MinLength(6, {message: 'يجب أن يكون الحقل اكبر من 6 خانات'})
-    @IsNotEmpty()
+    @IsString({message: AR.IsString})
+    @MinLength(6, {message: AR.MinLength})
+    @IsNotEmpty({message: AR.IsNotEmpty})
     @ApiProperty({type: String, description: 'password'})
     password: string;
     // ----------------------------------------------------------------------------------- //    
-    @IsBoolean({message: 'يجب ان تكون حالة المستخدم اما مفعلة أو لا'})
+    @IsBoolean({message: AR.IsBoolean})
     @ApiProperty({type: Boolean, description: 'isActive'})
     isActive: boolean;
     // ----------------------------------------------------------------------------------- //
-    @IsString({message: 'يجب ان يكون نوع الحقل نصي'})
+    @IsString({message: AR.IsString})
     @ApiProperty({type: String, description: 'city'})
     city : string
     // ----------------------------------------------------------------------------------- //
-    @IsString({message: 'يجب ان يكون نوع الحقل نصي'})
+    @IsString({message: AR.IsString})
     @IsEnum(MemberType, {message : 'يجب ان يكون نوع المستخدم طالب أو أستاذ'})
-    @IsNotEmpty()
+    @IsNotEmpty({message: AR.IsNotEmpty})
     @ApiProperty({type: String, enum: MemberType, default : MemberType.Student})
     memberType: MemberType;
     // ----------------------------------------------------------------------------------- //

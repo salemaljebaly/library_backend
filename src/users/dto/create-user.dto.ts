@@ -8,38 +8,39 @@ import {
   MinLength,
 } from 'class-validator';
 import { Role } from 'src/auth/enum/role.enum';
+import { AR } from 'src/locale/ar';
 
 export class CreateUserDto {
   // ----------------------------------------------------------------------------------- //
-  @IsString()
+  @IsString({message: AR.IsString})
   @MinLength(3)
-  @IsNotEmpty()
+  @IsNotEmpty({message: AR.IsNotEmpty})
   @ApiProperty({ type: String, description: 'fullName' })
   fullName: string;
   // ----------------------------------------------------------------------------------- //
-  @IsString()
-  @IsNotEmpty()
+  @IsString({message: AR.IsString})
+  @IsNotEmpty({message: AR.IsNotEmpty})
   @ApiProperty({ type: String, description: 'username' })
   username: string;
   // ----------------------------------------------------------------------------------- //
-  @IsEmail()
-  @IsNotEmpty()
+  @IsEmail({message: AR.IsEmail})
+  @IsNotEmpty({message: AR.IsNotEmpty})
   @ApiProperty({ type: String, description: 'email' })
   email: string;
   // ----------------------------------------------------------------------------------- //
-  @IsString()
+  @IsString({message: AR.IsString})
   @MinLength(6)
-  @IsNotEmpty()
+  @IsNotEmpty({message: AR.IsNotEmpty})
   @ApiProperty({ type: String, description: 'password' })
   password: string;
   // ----------------------------------------------------------------------------------- //
-  @IsBoolean()
+  @IsBoolean({message: AR.IsBoolean})
   @ApiProperty({ type: Boolean, description: 'isActive' })
   isActive: boolean;
   // ----------------------------------------------------------------------------------- //
-  @IsString()
+  @IsString({message: AR.IsString})
   @IsEnum(Role)
-  @IsNotEmpty()
+  @IsNotEmpty({message: AR.IsNotEmpty})
   @ApiProperty({type: String, enum: Role, default : Role.User})
   role: Role;
   // ----------------------------------------------------------------------------------- //

@@ -30,7 +30,7 @@ export class MembersService {
     );
     // check if admin is created member or not
     user.role != null ? createMembernDto.user = user : null
-    const member = this.memberRepository.save({...createMembernDto, department : await dep});
+    const member = this.memberRepository.create({...createMembernDto, department : await dep});
     if(await this.findByUserName(createMembernDto.username) == undefined){
       await (await member).save();
     }

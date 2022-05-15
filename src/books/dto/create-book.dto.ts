@@ -66,7 +66,6 @@ export class CreateBookDto {
   fileType: string;
   // ----------------------------------------------------------------------------------- //
   @IsString({message: AR.IsString})
-  @IsEnum(FileTypes, {message: AR.IsEnum})
   @IsNotEmpty({message: AR.IsNotEmpty})
   @ApiProperty({ type: String, description: 'returnDate' })
   returnDate : string;

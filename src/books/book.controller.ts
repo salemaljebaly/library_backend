@@ -147,7 +147,6 @@ export class BookController {
   })
   // @UseGuards(JwtAuthGuard)
   // @ApiBearerAuth()
-  @ApiParam({name: "ٌbookId"})
   @UseInterceptors(FileInterceptor('file', storage))
   async uploadFile(@Param('bookId') bookId : number, @UploadedFile() file) {
     const currentBook = await this.bookService.findOneBook(1);

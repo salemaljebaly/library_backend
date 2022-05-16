@@ -26,18 +26,19 @@ export class BarrowController {
   // ----------------------------------------------------------------------------------- //
   constructor(private readonly barrowService: BarrowService) {}
   // ----------------------------------------------------------------------------------- //
-  @Post()
+  @Post(":bookId/:memberId")
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  @ApiParam({
-    name: 'bookId',
-  })
+  // @ApiParam({
+  //   name: 'bookId',
+  // })
   
-  @ApiParam({
-    name: 'memberId',
-  })
-  create(@Body() createBarrowDto: CreateBarrowDto, @Request() req) {
-    return this.barrowService.create( createBarrowDto, req.bookId, req.memberId);
+  // @ApiParam({
+  //   name: 'memberId',
+  // })
+  create(@Body() createBarrowDto: CreateBarrowDto, @Param('bookId') bookId : number, @Param('memberId') memberId : number) {
+    console.log(bookId);
+    return this.barrowService.create( createBarrowDto, bookId, memberId);
   }
   // ----------------------------------------------------------------------------------- //
   @Get()

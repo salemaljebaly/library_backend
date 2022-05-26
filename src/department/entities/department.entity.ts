@@ -22,7 +22,9 @@ export class Department extends BaseEntity {
   @UpdateDateColumn()
   updateAt: Date;
   // ----------------------------------------------------------------------------------- //
-  @OneToMany(() => Members, (member: Members) => member.department)
+  @OneToMany(() => Members, (member: Members) => member.department, {
+    cascade: true,
+  })
   member : Members[]; 
   // ----------------------------------------------------------------------------------- //
   @ManyToOne(() => User, (user: User) => user.department)

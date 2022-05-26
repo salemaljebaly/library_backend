@@ -64,7 +64,9 @@ export class Members extends BaseEntity{
     memberType: MemberType
     // ----------------------------------------------------------------------------------- //
     // OneToMany relation ship between department and 
-    @ManyToOne(() => Department, (department: Department) => department.member)
+    @ManyToOne(() => Department, (department: Department) => department.member,{
+        onDelete: 'CASCADE'
+    })
     department: Department; 
 
     // ----------------------------------------------------------------------------------- //

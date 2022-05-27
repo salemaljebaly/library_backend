@@ -4,25 +4,29 @@ WORKDIR /usr/src/library_app
 
 COPY package*.json ./
 
-RUN npm install --only=development
+RUN npm install
 
 COPY . .
+
 
 RUN npm run build
 
-FROM node:16.13.2 As production
+EXPOSE 4003
 
-ARG NODE_ENV=production
-ENV NODE_ENV=${NODE_ENV}
+CMD ["node", "dist/src/main"]
+# FROM node:16.13.2 As production
 
-WORKDIR /usr/src/library_app
+# ARG NODE_ENV=production
+# ENV NODE_ENV=${NODE_ENV}
 
-COPY package*.json ./
+# WORKDIR /usr/src/library_app
 
-RUN npm install --only=production
+# COPY package*.json ./
 
-COPY . .
+# RUN npm install --only=production
 
-COPY --from=development /usr/src/library_app/dist ./dist
+# COPY . .
 
-CMD ["node", "dist/main"]
+# COPY --from=development /usr/src/library_app/dist ./dist
+
+# CMD ["node", "dist/main"]

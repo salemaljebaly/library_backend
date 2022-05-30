@@ -1,4 +1,4 @@
-FROM node:16.13.2 As development
+FROM node:16.13.2
 
 WORKDIR /usr/src/library_app
 
@@ -11,22 +11,6 @@ COPY . .
 
 RUN npm run build
 
-EXPOSE 4003
+EXPOSE 4000
 
 CMD ["node", "dist/src/main"]
-# FROM node:16.13.2 As production
-
-# ARG NODE_ENV=production
-# ENV NODE_ENV=${NODE_ENV}
-
-# WORKDIR /usr/src/library_app
-
-# COPY package*.json ./
-
-# RUN npm install --only=production
-
-# COPY . .
-
-# COPY --from=development /usr/src/library_app/dist ./dist
-
-# CMD ["node", "dist/main"]

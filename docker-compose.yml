@@ -1,11 +1,57 @@
 version: '3.9'
+
 services:
   mysqldb:
     container_name: mysql-container
     image: mysql
     command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    # restart: always
     environment:
+      MYSQL_DATABASE: library
       MYSQL_ROOT_PASSWORD: s1239875
+      MYSQL_PASSWORD: s1239875
+      MYSQL_USER: db_user
     ports:
-      - '4001:3306'
+      - 4001:3306
+    volumes:
+      - ./data/mysqldb:/var/lib/mysql
+
+  phpmyadmin:
+    container_name: phpmyadmin-container
+    image: phpmyadmin
+    depends_on:
+      - mysqldb
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: mysqldb
+      PMA_USER: root
+      PMA_PASSWORD: s1239875
+
+  library_api:
+    container_name: library-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - DB_PORT=3306
+      - DB_HOST=mysqldb
+      - DB_USERNAME=root
+      - DB_PASSWORD=s1239875      
+    ports:
+      - 4000:4000
+    depends_on:
+      - mysqldb
+
+      
+  library_frontend:
+    container_name: library-frontend
+    build: ../library_frontend
+    ports:
+      - 3000:3000
+    depends_on:
+      - library_api
+
+    
+

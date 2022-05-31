@@ -13,8 +13,8 @@ services:
       MYSQL_USER: db_user
     ports:
       - 4001:3306
-    volumes:
-      - ./data/mysqldb:/var/lib/mysql
+    # volumes:
+    #   - ./data/mysqldb:/var/lib/mysql
 
   phpmyadmin:
     container_name: phpmyadmin-container

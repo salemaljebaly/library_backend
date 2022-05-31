@@ -2,8 +2,8 @@ version: '3.9'
 
 services:
   mysqldb:
-    container_name: mysql-container:oracle
-    image: mysql
+    container_name: mysql-container
+    image: mysql:oracle
     command: --default-authentication-plugin=mysql_native_password
     # restart: always
     environment:

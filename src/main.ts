@@ -6,7 +6,8 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin: '*'
+    origin: '*',
+    allowedHeaders:'*'
   });
   const config = new DocumentBuilder()
   .setTitle(process.env.APP_NAME)

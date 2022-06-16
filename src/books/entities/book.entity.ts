@@ -61,7 +61,7 @@ export class Book extends BaseEntity {
   @OneToMany(() => Barrow, (barrow: Barrow) => barrow.member)
   barrow : Barrow[];
   // ----------------------------------------------------------------------------------- //
-  @ManyToOne(() => User, (user: User) => user.book)
-  user : User;
+  // @ManyToOne(() => User, (user: User) => user.book)
+  // user : User;
   // ----------------------------------------------------------------------------------- //
 }

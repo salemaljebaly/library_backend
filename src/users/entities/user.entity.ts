@@ -66,8 +66,8 @@ export class User extends BaseEntity {
   @OneToMany(() => Department, (department : Department) => department.user)
   department : Department[]
   // ----------------------------------------------------------------------------------- //
-  @OneToMany(() => Book, (book : Book) => book.user)
-  book : Book[]
+  // @OneToMany(() => Book, (book : Book) => book.user)
+  // book : Book[]
   // ----------------------------------------------------------------------------------- //
   @OneToMany(() => Members, (member : Members) => member.user)
   member : Members[]

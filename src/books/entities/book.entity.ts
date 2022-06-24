@@ -1,3 +1,4 @@
+import { Author } from 'src/author/entities/author.entity';
 import { Barrow } from 'src/barrow/entities/barrow.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
@@ -67,7 +68,7 @@ export class Book extends BaseEntity {
   @OneToMany(() => Barrow, (barrow: Barrow) => barrow.member)
   barrow : Barrow[];
   // ----------------------------------------------------------------------------------- //
-  // @ManyToOne(() => User, (user: User) => user.book)
-  // user : User;
+  @ManyToOne(() => Author, (author: Author) => author.book)
+  author : Author;
   // ----------------------------------------------------------------------------------- //
 }

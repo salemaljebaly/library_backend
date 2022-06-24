@@ -10,6 +10,7 @@ import { MembersModule } from './members/members.module';
 import { DepartmentModule } from './department/department.module';
 import { BookModule } from './books/book.module';
 import { BarrowModule } from './barrow/barrow.module';
+import { AuthorModule } from './author/author.module';
 
 
 @Module({
@@ -21,7 +22,8 @@ import { BarrowModule } from './barrow/barrow.module';
     MembersModule, 
     DepartmentModule,
     BookModule,
-    BarrowModule
+    BarrowModule,
+    AuthorModule
   ],
   controllers: [AppController],
   providers: [AppService],

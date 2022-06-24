@@ -35,6 +35,16 @@ export class CreateBookDto {
   @ApiProperty({ type: Number, description: 'bookPages' })
   bookPages: number;
   // ----------------------------------------------------------------------------------- //
+  @IsInt()
+  @IsOptional()
+  @ApiProperty({ type: Number, description: 'bookCount' })
+  bookCount: number;
+  // ----------------------------------------------------------------------------------- //
+  @IsInt()
+  @IsOptional()
+  @ApiProperty({ type: String, description: 'isbn' })
+  isbn: string;
+  // ----------------------------------------------------------------------------------- //
   @IsString({message: AR.IsString})
   @IsOptional()
   @ApiProperty({ type: String, description: 'bookPublisher' })
@@ -65,5 +75,4 @@ export class CreateBookDto {
   @ApiProperty({ type: String, enum: FileTypes })
   fileType: string;
   // ----------------------------------------------------------------------------------- //
-  user : User;
 }

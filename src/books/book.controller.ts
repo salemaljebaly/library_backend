@@ -112,7 +112,7 @@ export class BookController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   findOne(@Param('id') id: string) {
-    return this.bookService.findOne(+id);
+    return this.bookService.findOne(+id); 
   }
   // ----------------------------------------------------------------------------------- //
   @Patch(':id/:authorId')

@@ -39,7 +39,7 @@ export class BookService {4
   // get book by user id
   findOne(id: number) {
     return this.bookRepository.findOne({ where: {id : id},
-      relations: [, this.relationColumn] 
+      relations: [this.relationColumn] 
     });
   }
 

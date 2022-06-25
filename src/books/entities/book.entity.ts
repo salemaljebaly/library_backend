@@ -3,7 +3,6 @@ import { Barrow } from 'src/barrow/entities/barrow.entity';
 import { User } from 'src/users/entities/user.entity';
 import {
   BaseEntity,
-  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -25,9 +24,6 @@ export class Book extends BaseEntity {
   // ----------------------------------------------------------------------------------- //
   @Column()
   bookPublishDate: string;
-  // ----------------------------------------------------------------------------------- //
-  @Column({default: 'salem'})
-  authorName: string;
   // ----------------------------------------------------------------------------------- //
   @Column()
   bookPages: number;

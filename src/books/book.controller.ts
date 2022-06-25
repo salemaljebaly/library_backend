@@ -78,9 +78,9 @@ export class BookController {
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ description: AR.book_created })
-  create(@Body() createBookDto: CreateBookDto, @Request() req) {
+  create(@Body() createBookDto: CreateBookDto, @Param('id') id: number, @Request() req) {
     // bookgetway.handleEvent('updated');
-    return this.bookService.create(createBookDto, req.user);
+    return this.bookService.create(createBookDto, id,req.user);
   }
   // ----------------------------------------------------------------------------------- //
   @Get('bookByName')
@@ -118,8 +118,8 @@ export class BookController {
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  update(@Param('id') id: string, @Body() updateReportDto: UpdateReportDto) {
-    return this.bookService.update(+id, updateReportDto);
+  update(@Param('id') id: string,authorId : number, @Body() updateReportDto: UpdateReportDto) {
+    return this.bookService.update(+id,authorId, updateReportDto);
   }
   // ----------------------------------------------------------------------------------- //
   @Delete(':id')

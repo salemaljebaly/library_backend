@@ -1,24 +1,29 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Author } from 'src/author/entities/author.entity';
 import { Members } from 'src/members/entities/members.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateBookDto as CreateBookDto } from './dto/create-book.dto';
 import { UpdateReportDto } from './dto/update-book.dto';
 import { Book } from './entities/book.entity';
-import { FileTypes } from './enums/bookType';
 
 @Injectable()
-export class BookService {
+export class BookService {4
+  relationColumn : string = 'author';
   // ----------------------------------------------------------------------------------- //
   constructor(
     @InjectRepository(Book)
     private bookRepository: Repository<Book>,
+    @InjectRepository(Author)
+    private authorRepository: Repository<Author>,
   ) {}
   // ----------------------------------------------------------------------------------- //
-  async create( createBookDto: CreateBookDto, user: User) {
-    // createBookDto.user = user;
-    const book = this.bookRepository.create(createBookDto);
+  async create( createBookDto: CreateBookDto,authorId : number, user: User) { 
+    const author = this.authorRepository.findOne(
+      {where:{id: authorId}}
+    );
+    const book = this.bookRepository.create({...createBookDto,author: await author});
     await book.save();
 
     return book;
@@ -27,14 +32,14 @@ export class BookService {
   // get all books with current user authorized
   findAll() {
     return this.bookRepository.find(
-      { relations: ['barrow'] }
+      { relations: ['barrow', this.relationColumn] }
       );
   }
   // ----------------------------------------------------------------------------------- //
   // get book by user id
   findOne(id: number) {
-    return this.bookRepository.findOne({ where: {id : id}
-      // , relations: ['barrow'] 
+    return this.bookRepository.findOne({ where: {id : id},
+      relations: [, this.relationColumn] 
     });
   }
 
@@ -56,8 +61,11 @@ export class BookService {
   }
   // ----------------------------------------------------------------------------------- //
   // update book
-  update(id: number, updateReportDto: UpdateReportDto) {
-    return this.bookRepository.update(id, updateReportDto);
+  async update(id: number, authorId: number,updateReportDto: UpdateReportDto) {
+    const author = this.authorRepository.findOne(
+      {where:{id: authorId}}
+    );
+    return  this.bookRepository.update(id, {...updateReportDto,author : await author});
   }
   // ----------------------------------------------------------------------------------- //
   async uploadFile(id: number, filetype: string, bookFilePath : string) {

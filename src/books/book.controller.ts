@@ -72,7 +72,7 @@ export const storage = {
 export class BookController {
   public static fileType = FileTypes.PNG;
   // ----------------------------------------------------------------------------------- //
-  constructor(private readonly bookService: BookService) {}
+  constructor(private readonly bookService: BookService) {} 
   // ----------------------------------------------------------------------------------- //
   @Post()
   @UseGuards(JwtAuthGuard)

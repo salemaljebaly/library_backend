@@ -118,7 +118,7 @@ export class BookController {
   @Patch(':id/:authorId')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
-  update(@Param('id') id: string,authorId : number, @Body() updateReportDto: UpdateReportDto) {
+  update(@Param('id') id: string,@Param('authorId') authorId : number, @Body() updateReportDto: UpdateReportDto) {
     return this.bookService.update(+id,authorId, updateReportDto);
   }
   // ----------------------------------------------------------------------------------- //

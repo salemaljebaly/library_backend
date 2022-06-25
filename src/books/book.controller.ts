@@ -74,7 +74,7 @@ export class BookController {
   // ----------------------------------------------------------------------------------- //
   constructor(private readonly bookService: BookService) {} 
   // ----------------------------------------------------------------------------------- //
-  @Post()
+  @Post(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiCreatedResponse({ description: AR.book_created })
@@ -115,7 +115,7 @@ export class BookController {
     return this.bookService.findOne(+id);
   }
   // ----------------------------------------------------------------------------------- //
-  @Patch(':id')
+  @Patch(':id/:authorId')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   update(@Param('id') id: string,authorId : number, @Body() updateReportDto: UpdateReportDto) {

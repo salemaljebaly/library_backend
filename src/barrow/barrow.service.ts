@@ -44,6 +44,13 @@ export class BarrowService {
       );
   }
   // ----------------------------------------------------------------------------------- //
+  // get all barrows with current user authorized 
+  findByMember(currentMember : Members) {
+    return  this.barrowRepository.find({ where: {member:{id : currentMember.id}}
+      , relations: this.relationTable
+    });
+  }
+  // ----------------------------------------------------------------------------------- //
   // get barrow by user id
   findOne(id: number) {
     return this.barrowRepository.findOne({ where: {id : id}

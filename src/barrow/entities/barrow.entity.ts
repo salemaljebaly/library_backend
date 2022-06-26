@@ -33,7 +33,7 @@ export class Barrow extends BaseEntity {
   @Column()
   returnDate : string;
   // ----------------------------------------------------------------------------------- //
-  @ManyToOne(() =>Members, (member:Members) => member)
+  @ManyToOne(() =>Members, (member:Members) => member.barrow)
   member : Members
   // ----------------------------------------------------------------------------------- //
   @ManyToOne(() =>Book, (book:Book) => book.barrow)

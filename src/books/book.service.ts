@@ -68,7 +68,7 @@ export class BookService {4
       where: {
         state: 'Stayed',
       },
-      relations: ['barrow']
+      relations: [this.relationColumn] 
     });
     return books;
   }

@@ -26,6 +26,15 @@ export class BarrowController {
   // ----------------------------------------------------------------------------------- //
   constructor(private readonly barrowService: BarrowService) {}
   // ----------------------------------------------------------------------------------- //
+  @Get('bymember')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  findBarrowsByMember(@Request() req) {
+    // return this.barrowService.findAll();
+    return this.barrowService.findByMember(req.user);
+    // return "test"
+  }
+  // ----------------------------------------------------------------------------------- //
   @Post(":bookId/:memberId")
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()

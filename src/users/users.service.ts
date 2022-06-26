@@ -6,6 +6,8 @@ import { Like, Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import * as bcrypt from 'bcryptjs';
+
 // ----------------------------------------------------------------------------------- //
 @Injectable()
 export class UsersService {
@@ -62,7 +64,8 @@ export class UsersService {
   }
   // ----------------------------------------------------------------------------------- //
   async update(id: number, updateUserDto: UpdateUserDto) {
-    return await this.usersRepository.update(id, updateUserDto);
+    return await this.usersRepository.update(id, {...updateUserDto,  
+      password : await bcrypt.hash(updateUserDto.password, 8),});
   }
   // ----------------------------------------------------------------------------------- //
   async remove(id: number){

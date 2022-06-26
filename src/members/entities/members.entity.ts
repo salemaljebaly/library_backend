@@ -1,4 +1,4 @@
-import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, Long,ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, Long,ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import * as bcrypt from 'bcryptjs';
 import { MemberType } from "../enum/memberType.enum";
 import { Department } from "src/department/entities/department.entity";
@@ -43,10 +43,13 @@ export class Members extends BaseEntity{
 
     // encrypt the password before inserted in database
     @BeforeInsert()
+    @BeforeUpdate()
     async hashPassword(){
+        console.log(this.password)
         this.password = await bcrypt.hash(this.password, 8);
     }
 
+    
     // check the password entered is correct
     async validatePassword(password: string) : Promise<boolean>{
         return bcrypt.compare(password, this.password);

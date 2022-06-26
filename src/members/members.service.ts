@@ -6,6 +6,8 @@ import { MemberLoginDto } from './dto/members-login.dto';
 import { CreateMemberDto } from './dto/create-members.dto';
 import { UpdateMembersDto } from './dto/update-members.dto';
 import { Members } from './entities/members.entity';
+import * as bcrypt from 'bcryptjs';
+
 import { CreateDepartmentDto } from 'src/department/dto/create-department.dto';
 import { Department } from 'src/department/entities/department.entity';
 import { User } from 'src/users/entities/user.entity';
@@ -68,6 +70,7 @@ export class MembersService {
     user.role != null ? updateMembernDto.user = user : null
     return await this.memberRepository.update(id,{
       ...updateMembernDto,
+      password : await bcrypt.hash(updateMembernDto.password, 8),
       department : await dep
     });
   }

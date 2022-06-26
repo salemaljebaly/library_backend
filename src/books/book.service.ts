@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { CreateBookDto as CreateBookDto } from './dto/create-book.dto';
 import { UpdateReportDto } from './dto/update-book.dto';
 import { Book } from './entities/book.entity';
+import { BookState } from './enums/bookType';
 
 @Injectable()
 export class BookService {4
@@ -42,7 +43,7 @@ export class BookService {4
       relations: [this.relationColumn] 
     });
   }
-
+  // ----------------------------------------------------------------------------------- //
   findOneBook(id: number){
     return this.bookRepository.findOne({
       where : {id: id}
@@ -54,6 +55,18 @@ export class BookService {4
     const books = await this.bookRepository.find({
       where: {
         bookName: bookName,
+      },
+      relations: ['barrow']
+    });
+    return books;
+  }
+  // ----------------------------------------------------------------------------------- //
+  // get all books by user id
+  async findBookStayed() {
+    console.log('findbookstae')
+    const books = await this.bookRepository.find({
+      where: {
+        state: 'Stayed',
       },
       relations: ['barrow']
     });

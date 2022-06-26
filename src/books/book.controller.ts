@@ -74,6 +74,15 @@ export class BookController {
   // ----------------------------------------------------------------------------------- //
   constructor(private readonly bookService: BookService) {} 
   // ----------------------------------------------------------------------------------- //
+  @Get('stayed')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  findStayedBook() {
+    // req.user
+    return this.bookService.findBookStayed();
+    // return "test"
+  }
+  // ----------------------------------------------------------------------------------- //
   @Post(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
@@ -114,6 +123,8 @@ export class BookController {
   findOne(@Param('id') id: string) {
     return this.bookService.findOne(+id); 
   }
+  // ----------------------------------------------------------------------------------- //
+
   // ----------------------------------------------------------------------------------- //
   @Patch(':id/:authorId')
   @UseGuards(JwtAuthGuard)

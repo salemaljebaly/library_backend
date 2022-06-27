@@ -63,7 +63,6 @@ export class BookService {4
   // ----------------------------------------------------------------------------------- //
   // get all books by user id
   async findBookStayed() {
-    console.log('findbookstae')
     const books = await this.bookRepository.find({
       where: {
         state: 'Stayed',

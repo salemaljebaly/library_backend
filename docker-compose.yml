@@ -53,6 +53,14 @@ services:
     depends_on:
       - library_api
 
+  library_member_gate:
+    container_name: library-member-gate
+    build: ../library_member_gate
+    ports:
+      - 3002:3000
+    depends_on:
+      - library_api
+
 networks: 
   default: 
     external: true

@@ -93,7 +93,7 @@ export class MembersService {
     // properties  that want to save in jwt
     const payload = {
       id: member.id,
-      firstName: member.fullName,
+      fullName: member.fullName,
       username: member.username,
       email: member.email,
       phone: member.phone,

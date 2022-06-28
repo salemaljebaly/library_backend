@@ -14,7 +14,7 @@ export class CreateMemberDto {
     @IsString({message: AR.IsString})
     @MinLength(3)
     @IsNotEmpty({message: AR.IsNotEmpty})
-    @ApiProperty({type: String, description: 'firstname'})
+    @ApiProperty({type: String, description: 'fullName'})
     fullName: string;
     // ----------------------------------------------------------------------------------- //
     @IsString({message: AR.IsString})

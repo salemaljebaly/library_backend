@@ -98,6 +98,7 @@ export class MembersService {
       email: member.email,
       phone: member.phone,
       isActive: member.isActive,
+      memberType : member.memberType,
       city: member.city      
     };
 

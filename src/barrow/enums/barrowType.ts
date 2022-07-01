@@ -16,3 +16,10 @@ export enum FileTypes  {
     MP3 = "mp3",
     MP4 = "mp4"
 }
+
+
+export enum BarrowState  {
+    PENDING = "pending",
+    ACCEPTED = "accepted",
+    REJECTED = "rejected",
+}

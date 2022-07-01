@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Book } from 'src/books/entities/book.entity';
 import { Members } from 'src/members/entities/members.entity';
-import { Repository } from 'typeorm';
+import { Not, Repository } from 'typeorm';
 import { CreateBarrowDto } from './dto/create-barrow.dto';
 import { UpdateReportDto } from './dto/update-barrow.dto';
 import { Barrow } from './entities/barrow.entity';
-import { FileTypes } from './enums/barrowType';
+import { BarrowState, FileTypes } from './enums/barrowType';
 
 @Injectable()
 export class BarrowService {
@@ -46,9 +46,22 @@ export class BarrowService {
   // ----------------------------------------------------------------------------------- //
   // get all barrows with current user authorized 
   findByMember(currentMember : Members) {
-    return  this.barrowRepository.find({ where: {member:{id : currentMember.id}}
+    return  this.barrowRepository.find({ where: 
+      {member:
+        {id : currentMember.id},  state: Not(BarrowState.REJECTED)}
       , relations: this.relationTable
     });
+  }
+  // ----------------------------------------------------------------------------------- //
+  // get all books by user id
+  async findAcceptBarrow() {
+    const barrow = await this.barrowRepository.find({
+      where: {
+        state: BarrowState.ACCEPTED,
+      },
+      relations: this.relationTable
+    });
+    return barrow;
   }
   // ----------------------------------------------------------------------------------- //
   // get barrow by user id

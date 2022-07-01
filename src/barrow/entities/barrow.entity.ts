@@ -11,7 +11,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { BookState, FileTypes, ReportType } from '../enums/barrowType';
+import { BarrowState, BookState, FileTypes, ReportType } from '../enums/barrowType';
 
 @Entity()
 export class Barrow extends BaseEntity {
@@ -31,7 +31,14 @@ export class Barrow extends BaseEntity {
   updateAt: Date;
   // ----------------------------------------------------------------------------------- //
   @Column()
-  returnDate : string;
+  returnDate : string; 
+  // ----------------------------------------------------------------------------------- //
+      @Column({
+        type: 'enum',
+        enum: BarrowState,
+        default: BarrowState.PENDING
+    })
+    state: BarrowState
   // ----------------------------------------------------------------------------------- //
   @ManyToOne(() =>Members, (member:Members) => member.barrow)
   member : Members

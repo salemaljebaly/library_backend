@@ -133,6 +133,13 @@ export class BookController {
     return this.bookService.update(+id,authorId, updateReportDto);
   }
   // ----------------------------------------------------------------------------------- //
+  @Patch(':id')
+  @UseGuards(JwtAuthGuard)
+  @ApiBearerAuth()
+  updateBookOnly(@Param('id') id: string ,@Body() updateReportDto: UpdateReportDto) {
+    return this.bookService.updateOne(+id, updateReportDto);
+  }
+  // ----------------------------------------------------------------------------------- //
   @Delete(':id')
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()

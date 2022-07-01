@@ -80,6 +80,11 @@ export class BookService {4
     return  this.bookRepository.update(id, {...updateReportDto,author : await author});
   }
   // ----------------------------------------------------------------------------------- //
+  // update book
+  async updateOne(id: number,updateReportDto: UpdateReportDto) {
+    return  this.bookRepository.update(id, {...updateReportDto});
+  }
+  // ----------------------------------------------------------------------------------- //
   async uploadFile(id: number, filetype: string, bookFilePath : string) {
     const currentBook  = await this.findOneBook(id)
     currentBook.fileType = filetype;
